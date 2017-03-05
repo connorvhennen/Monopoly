@@ -17,8 +17,8 @@ class Gameboard{
 
 private:
     
-    Property Go;
-    Property Go(1,"red");
+    
+    Property Go(int address = 1,std::string color = "red");
     Property MediterraneanAvenue(2,"red");
     Event CommunityChest(3,17,34);
     Property BalticAvenue(4,"blue");
