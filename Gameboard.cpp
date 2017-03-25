@@ -6,49 +6,10 @@
 //  Copyright © 2017 Connor Hennen. All rights reserved.
 //
 
+
 #include "Gameboard.hpp"
 
-Gameboard::Gameboard(){
-    board.push_back(space::space(1,"ZBT",1));
-    board.push_back(space::space(1,"Strathmore Plaza Tunnel", 2, "brown"));
-    board.push_back(space::space(2,"Education Legislation", 3));
-    board.push_back(space::space(1,"Luskin Center", 4, "brown"));
-    board.push_back(space::space(4,"Enrollment Fee", 5));
-    board.push_back(space::space(5,"Uber Credit", 6));
-    board.push_back(space::space(1,"Ackerman", 7, "blue"));
-    board.push_back(space::space(3,"USAC Initiative", 8));
-    board.push_back(space::space(1,"Kerckhoff", 9, "blue"));
-    board.push_back(space::space(1,"Math Science Building", 10, "blue"));
-    board.push_back(space::space(7,"Academic Probation", 11));
-    board.push_back(space::space(1,"Powell Library", 12, "pink"));
-    board.push_back(space::space(6,"Powell Study Room", 13));
-    board.push_back(space::space(1,"Royce Hall", 14, "pink"));
-    board.push_back(space::space(1,"Young Research Library", 15, "pink"));
-    board.push_back(space::space(5,"Lyft Credit", 16));
-    board.push_back(space::space(1,"Northern Lights", 17, "orange"));
-    board.push_back(space::space(2,"Education Legislation", 18));
-    board.push_back(space::space(1,"Intramural Fields", 19, "orange"));
-    board.push_back(space::space(1,"Sunset Rec", 21, "orange"));
-    board.push_back(space::space(9,"Parking Structure 7", 21));
-    board.push_back(space::space(1,"Hedrick Hall", 22,"red"));
-    board.push_back(space::space(3,"USAC Inititative", 23));
-    board.push_back(space::space(1,"Rendevous", 24, "red"));
-    board.push_back(space::space(1,"Bruin Plate", 25, "red"));
-    board.push_back(space::space(5,"LAX Flyaway", 26));
-    board.push_back(space::space(1,"Bruin Fitness Center", 27, "yellow"));
-    board.push_back(space::space(1,"Tennis Courts", 28, "yellow"));
-    board.push_back(space::space(6,"YRL Power Outlet", 29));
-    board.push_back(space::space(1,"Inverted Fountain", 30, "yellow"));
-    board.push_back(space::space(8,"You got all F's", 31));
-    board.push_back(space::space(1,"Sculpture Garden", 32, "green"));
-    board.push_back(space::space(1,"Jann's Steps", 33, "green"));
-    board.push_back(space::space(2,"Education Legislation", 34));
-    board.push_back(space::space(1,"Wooden Center", 35, "green"));
-    board.push_back(space::space(5,"Taxi", 36));
-    board.push_back(space::space(3,"USAC Initiative", 37));
-    board.push_back(space::space(1,"In 'N Out", 38, "dark blue"));
-    board.push_back(space::space(4,"Textbook Fees", 39));
-    board.push_back(space::space(1,"Bruinwalk", 40, "dark blue"));
+
 //the eight colors will be encoded as int types: (1-8 as they appear on the board)
     
 //Properties are type 1, Community Chest are type 2, Chance Deck are type 3, Fines are Type 4, Transportation is type 5, Utility is type 6, Jail is type 7, Go to Jail is Type 8, Free Parking is type 9
@@ -94,34 +55,69 @@ Gameboard::Gameboard(){
 
     
     
-}
-space Gameboard::get_board(int t){
-    return board[t];
-}
+
+//space space::get_space(int loc){
+//    return board[loc];
+//}
 
 int space::get_type(){
-    return type;    
-};
+    return type;
+}
 
 std::string space::get_name(){
     return name;
-};
+}
 
-int space::get_location(){
+int space::space_location(){
     return location;
-};
+}
 
 std::string space::get_color(){
     return color;
-};
+}
 
 int space::get_price(){
     return price;
-}; 
+}
 
-void space::ownership(){
-    if (upForSale == true) {
-        std::cout << "Do you want to buy " << get_name() << "for" << get_price() << "?" << std::endl;
-    }
+int space::find_owner(){
+    return owner;
+}
+
+std::vector<space> board = {space::space(1,"ZBT",1), space(1,"Strathmore Plaza Tunnel", 2, "brown", 60, 2), space(2,"Education Legislation", 3), space(1,"Luskin Center", 4, "brown", 60, 4), space(4,"Enrollment Fee", 5), space(5,"Uber Credit", 6), space(1,"Ackerman", 7, "blue", 100, 6),
+    space(3,"USAC Initiative", 8),
+    space(1,"Kerckhoff", 9, "blue", 100, 6),
+    space(1,"Math Science Building", 10, "blue",120,8),
+    space(7,"Academic Probation", 11),
+    space(1,"Powell Library", 12, "pink",140,10),
+    space(6,"Powell Study Room", 13),
+    space(1,"Royce Hall", 14, "pink",140,10),
+    space(1,"Young Research Library", 15, "pink",160,12),
+    space(5,"Lyft Credit", 16),
+    space(1,"Northern Lights", 17, "orange", 180,14),
+    space(2,"Education Legislation", 18),
+    space(1,"Intramural Fields", 19, "orange",180,14),
+    space(1,"Sunset Rec", 20, "orange",200,16),
+    space(9,"Parking Structure 7", 21),
+    space(1,"Hedrick Hall", 22,"red",220,18),
+    space(3,"USAC Inititative", 23),
+    space(1,"Rendevous", 24, "red",220,18),
+    space(1,"Bruin Plate", 25, "red",240,20),
+    space(5,"LAX Flyaway", 26),
+    space(1,"Bruin Fitness Center", 27, "yellow",260,22),
+    space(1,"Tennis Courts", 28, "yellow",260,22),
+    space(6,"YRL Power Outlet", 29),
+    space(1,"Inverted Fountain", 30, "yellow",280,24),
+    space(8,"You got all F's", 31),
+    space(1,"Sculpture Garden", 32, "green",300,26),
+    space(1,"Jann's Steps", 33, "green",300,26),
+    space(2,"Education Legislation", 34),
+    space(1,"Wooden Center", 35, "green",320,28),
+    space(5,"Taxi", 36),
+    space(3,"USAC Initiative", 37),
+    space(1,"In 'N Out", 38, "dark blue",350,35),
+    space(4,"Textbook Fees", 39),
+    space(1,"Bruinwalk", 40, "dark blue",400,50)
 };
+
 

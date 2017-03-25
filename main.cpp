@@ -7,10 +7,21 @@
 //
 
 #include <iostream>
+#include <map>
 #include "Gameboard.hpp"
+#include "player.hpp"
 
-int main(int argc, const char * argv[]) {
-    Gameboard campus;
+int main(){
+ 
+    player Bob = player("Bob");
     
-    
+    Bob.turn();
+    std::cout << "Bob's tag " << Bob.getTag() << "\n";
+    std::cout << playerTag << "\n";
+    player Bill = player("Bill");
+
+    std::cout << "Bill's tag " << Bill.getTag() << "\n";
+    std::cout << playerTag;
+
+  
 }
