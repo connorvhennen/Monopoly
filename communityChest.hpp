@@ -6,15 +6,19 @@
 //  Copyright © 2017 Connor Hennen. All rights reserved.
 //
 
+
+
+#ifndef communityChest_hpp
+#define communityChest_hpp
+
 #include <time.h>
 #include <functional>
 #include <vector>
 #include <ctime>
 #include <iostream>
+#include <deque>
 
-#ifndef communityChest_hpp
-#define communityChest_hpp
-
+class player;
 template <typename T>
 class RandomOrder{
   public:
@@ -23,15 +27,65 @@ class RandomOrder{
       }
 };
 
-template <typename T, typename CMP = std::less<T>>
-class communityChestCards {
+class communityCard;
+
+const extern std::deque<communityCard> wholeCommunityDeck;
+extern std::deque<communityCard> communityDeck;
+class communityCard{
 private:
-    std::vector<T> communityDeck;
-    int 
+
 
 public:
-    <#member functions#>
+//    void payRent(int rentLoss){
+//        money = money - rentLoss;
+//    }
+//
+//    void winRent(player& winner, int rentWin){
+//        winner.money = winner.money + rentWin;
+//    }
+    //type 1 = win money, type 2 = lose money, type 3 = win money and move, type 4 = collect money from each player, type 5 = lose money per house you own
+    std::string name;
+    int tag;
+    int price;
+    int transfer;
+    int type;
+
+    communityCard(std::string n, int t, int ty, int p = 0, int tr = 0){
+        name = n;
+        tag = t;
+        type = ty;
+        price = p;
+        transfer = tr;
+    }
+
+
+
 };
+
+
+
+//class communityDeck{
+//    friend class player;
+//
+//private:
+//    std::deque<communityCard> comDeck;
+//
+//public:
+//    communityDeck(){
+//        *communityDeck = new wholeCommunityDeck;
+//        std::random_shuffle(comDeck.begin(),comDeck.end(),myrandom);
+//    };
+//
+//};
+//template <typename T, typename CMP = std::less<T>>
+//class communityChest {
+//private:
+//    std::vector<T> communityDeck;
+//    int 
+//
+//public:
+
+
 //// "Add another parameter". They said!
 //template <typename T, typename CMP = std::less<T> >
 //class SimplePair{

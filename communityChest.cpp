@@ -6,6 +6,7 @@
 //  Copyright © 2017 Connor Hennen. All rights reserved.
 //
 
+#include "communityChest.hpp"
 //#include <functional>   // std::less<T>
 //#include <ctime>
 //#include <iostream>
@@ -110,3 +111,21 @@ T custom_min( const T& lhs , const T& rhs, CMP cmp ) {
 //   return 0;
 //
 //}
+
+    //type 1 = win money, type 2 = lose money, type 3 = win money and move, type 4 = Go to Jail, type 6 = get out of jail free card
+//communityCard(std::string n, int t, int ty, int p = 0, int tr = 0){
+//    name = n;
+//    tag = t;
+//    type = ty;
+//    price = p;
+//    transfer = tr;
+//}
+
+communityCard myCards[] = {communityCard("ZBT has been converted to 24-Hour Open Study!", 1, 3, 200, 1), communityCard("FAFSA error in your favor", 2, 1, 200), communityCard("Ashe Fee", 3, 2, 50, 1), communityCard("Textbook Resale", 4, 1, 50), communityCard("Drop lowest midterm", 5, 5), communityCard("FAILED MIDTERM", 6, 4, 0, 11), communityCard("Collect donations on Bruinwalk", 7, 1, 50), communityCard("Sold TV", 8, 1, 100), communityCard("UCSHIP Payment", 9, 2, 100), communityCard("Tuition Payment", 10, 2, 150),communityCard("Tutor a student", 11, 1, 25), communityCard("Parking Ticket", 12, 2, 60),communityCard("Win a Survey", 13, 1, 10),communityCard("Holiday Present", 14, 1, 150),communityCard("Gene Block pays your tuition", 15, 1, 100),communityCard("MacBook Breaks", 16, 2, 50)};
+const std::deque<communityCard> wholeCommunityDeck(myCards, myCards + sizeof(myCards)/sizeof(communityCard));
+
+//int myrandom (int i) { return std::rand()%i;}
+//int myrandom (int i) { return std::rand()%i;}
+//std::deque<communityCard> communityDeck(myCards, myCards + sizeof(myCards)/sizeof(communityCard));
+std::deque<communityCard> communityDeck = wholeCommunityDeck;
+

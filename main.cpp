@@ -10,9 +10,19 @@
 #include <map>
 #include "Gameboard.hpp"
 #include "player.hpp"
+#include "communityChest.hpp"
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
+
+
+//int myrandom (int i) { return std::rand()%i;}
 
 int main(){
- 
+    std::srand(unsigned (std::time(0)));
+
+//    std::random_shuffle(communityDeck.begin(),communityDeck.end(),myrandom);
+
     player Bob = player("Bob");
     
     Bob.turn();
