@@ -1,15 +1,14 @@
 //
-//  gameboard.cpp
+//  Land.hpp
 //  Monopoly
 //
 //  Created by Connor Hennen on 1/13/17.
 //  Copyright © 2017 Connor Hennen. All rights reserved.
 //
 
-#include "Gameboard.hpp"
+#ifndef Land_hpp
+#define Land_hpp
 
-void Gameboard::payRent(){
-    
-    
-}
+#include <stdio.h>
 
+#endif /* Land_hpp */
