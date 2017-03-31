@@ -1,29 +1,24 @@
 //
 //  Property.hpp
-//  BruteForceMonopolyCode
+//  Monopoly
 //
-//  Created by Connor Hennen on 3/14/17.
+//  Created by Connor Hennen on 1/13/17.
 //  Copyright © 2017 Connor Hennen. All rights reserved.
 //
+#include <string>
 
-//#ifndef Property_hpp
-//#define Property_hpp
-//#include <string>
+#ifndef Property_hpp
+#define Property_hpp
 
+class Property{
+    
+public: 
+    Property(int pos, std::string color);
+    
+private:
+    int address;
+    std::string colorType;
+    
+};
 
-//class Property{
-//    friend class Gameboard;
-//public: 
-//    Property(std::string n, int pos, int c, int p, bool f = true);
-//    
-//    
-//private:
-//    std::string name;
-//    int address;
-//    int colorType;
-//    bool forSale;
-//    int price;
-//};
-//
-//
-//#endif /* Property_hpp */
+#endif /* Property_hpp */
