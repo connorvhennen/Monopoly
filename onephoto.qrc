@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/powellPic">
+        <file>powellstudyroom.jpg</file>
+    </qresource>
+</RCC>
