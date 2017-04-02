@@ -19,7 +19,7 @@ class mainwindow : public QMainWindow
     Q_OBJECT
 private slots:
 
-//    void maxPlayersCPU();
+
 public:
     explicit mainwindow(QWidget *parent = 0);
     ~mainwindow();
@@ -32,7 +32,7 @@ private:
 
 
 public slots:
-    //void updatePlayerCount();
+
     void startNewGame();
 };
 

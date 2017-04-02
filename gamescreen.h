@@ -37,17 +37,6 @@ public:
     void announceWinner(player a, player b);
     ~gamescreen();
 
-    //static void createPlayerWidget(player a);
-    //QRect  getFrameGeometry(const QLabel* a) const;
-
-
-//    static QString buyProp;
-    //QPushButton* restart;
-   // QPushButton* end;
-    //QString* notif;
-public slots:
-//    void sliderManagement();
-//    void sliderManagementP2();
     void playerTurn(player &a);
     void player2Turn(player& a);
 
@@ -98,20 +87,9 @@ public slots:
     void player2Turn19(player& a);
     void player2Turn20(player& a);
 
-
-//    void playerTurn5(player& a);
-//    void player2Turn5(player& a);
-
-
-
-private slots:
-
-
 private:
 
     Ui::gamescreen *ui;
-
-
 
 };
 

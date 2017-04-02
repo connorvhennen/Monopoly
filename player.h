@@ -77,13 +77,9 @@ public:
     void rollDice();
     void roll2Dice();
 
-   // space getSpaceInfo(space a);
-
     int getTag();
 
     void payRent(int rentLoss);
-
-    //void winRent(player& winner, int rentWin);
 
     void communityDraw();
 
@@ -106,19 +102,6 @@ public:
 
 private:
 
-//    std::string name;
-//    int tag;
-//    int location;
-
-//    int academicProbation;
-//    bool acedMidterms;
-//    bool dormArrest;
-//    bool dropLowestMidterm;
-//    int money;
-//    int doubles;
-//    bool eliminated;
-//    int netWorth;
-//    std::vector<space> landOwned;
 };
 
 template <typename T>

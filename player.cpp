@@ -72,18 +72,13 @@ void player::payRent(int rentLoss){
 
 void player::communityDraw(){
 
-    std::vector<communityCard> myCommunityDeck = communityDeck;
+    std::vector<communityCard> myCommunityDeck(communityDeck);
 
     std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
 
 
     communityCard cardDrawn = *myCommunityDeck.begin();
 
-
-        if (myCommunityDeck.size() == 0) {
-            myCommunityDeck = wholeCommunityDeck;
-            std::sort(myCommunityDeck.begin(), myCommunityDeck.begin(), RandomOrder<communityCard>());
-        }
 
         switch (1) {
 
@@ -205,171 +200,373 @@ void player::chanceDraw(){
 
     }
 
+void player::turn(){
 
-//void player::turn(){
+    // initialize seed for random integer generator
+//        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+//        std::default_random_engine generator(seed);
 
-//   // QString turnDialgoue;
+    if (eliminated == true) {
+        return;
+    }
+    doubles = 0;
+    if (academicProbation == 0) {
+        rollDice();
+    }
+    space curSpace = board[location - 1];
 
+    //find out the space type (property, tax, community chest, etc
+    int curType = curSpace.get_type();
+    if (curType == 1) {
+    switch (1) {
+    case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+            std::string choice;
+            QString ok = "Do you want to buy the " + QString::fromStdString(curSpace.get_name()) + " for $" + QString::number(curSpace.get_price()) + "? (y/n)";
+//            gamescreen::buyProp = ok;
 
-//    if (eliminated == true) {
-//        return;
-//    }
-//    doubles = 0;
-//    if (academicProbation == 0) {
-//        rollDice();
-//    }
-//    space curSpace = board[location];
+            //Ui::gamescreen ui -> label -> setText(buyProp);
+            //std::cin >> choice;
+            if(choice == "y"){
+                curSpace.purchased(getTag());
+                buyProperty(curSpace.get_price(), curSpace);
+            }
+            else{
+                curSpace.purchased(getTag());
+                buyProperty(curSpace.get_price(), curSpace);
+            }
+        break;
+    }
 
-//    //find out the space type (property, tax, community chest, etc
-//    int curType = curSpace.get_type();
-//    if (curType == 1) {
-//    switch (1) {
-//    case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
-//            std::string choice;
-//            //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
-//            //std::cin >> choice;
-//            if(choice == "y"){
-//                curSpace.purchased(getTag());
-//                buyProperty(curSpace.get_price(), curSpace);
-//            }
-//        break;
-//    }
+    case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+            payRent(curSpace.get_rent());
+            //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+        break;
+        }
+        case 3: break;
+    }
+    }
+        //Properties are type 1, Community Chest are type 2, Chance Deck are type 3, Fines are Type 4, Transportation is type 5, Utility is type 6
+    if (curType == 2) {
+        communityDraw();
+    }
+    if (curType == 3) {
+        chanceDraw();
+    }
+    if (curType == 4) {
+        money -= 200;
+        netWorth -= 200;
+    }
+    if (curType == 5) {
+        switch (1) {
 
-//    case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
-//            payRent(curSpace.get_rent());
-//            winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
-//        break;
-//        }
-//        case 3: break;
-//    }
-//    }
-//        //Properties are type 1, Community Chest are type 2, Chance Deck are type 3, Fines are Type 4, Transportation is type 5, Utility is type 6
-//    if (curType == 2) {
-//        communityDraw();
-//    }
-//    if (curType == 3) {
-//        chanceDraw();
-//    }
-//    if (curType == 4) {
-//        money -= 200;
-//    }
-//    if (curType == 5) {
-//        switch (1) {
+            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+                std::string choice;
+                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
+                //std::cin >> choice;
+                if(choice == "y"){
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                else{
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                break;
+            }
 
-//            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
-//                std::string choice;
-//                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
-//                //std::cin >> choice;
-//                if(choice == "y"){
-//                    curSpace.purchased(getTag());
-//                    buyProperty(curSpace.get_price(),curSpace);
-//                }
-//                break;
-//            }
+            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+                payRent(curSpace.get_rent());
+                //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+                break;
+            }
+            case 3: break;
+        }
+    }
+    if (curType == 6) {
+        switch (1) {
+                //            case <#constant#>:
+                //                <#statements#>
+                //                break;
+                //
+                //            default:
+                //                break;
+                //        }
+            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+                std::string choice;
+                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
+                //std::cin >> choice;
+                if(choice == "y"){
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                else{
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                break;
+            }
 
-//            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
-//                payRent(curSpace.get_rent());
-//                winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
-//                break;
-//            }
-//            case 3: break;
-//        }
-//    }
-//    if (curType == 6) {
-//        switch (1) {
-//                //            case <#constant#>:
-//                //                <#statements#>
-//                //                break;
-//                //
-//                //            default:
-//                //                break;
-//                //        }
-//            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
-//                std::string choice;
-//                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
-//                //std::cin >> choice;
-//                if(choice == "y"){
-//                    curSpace.purchased(getTag());
-//                    buyProperty(curSpace.get_price(),curSpace);
-//                }
-//                break;
-//            }
+            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+                payRent(4*movement);
+                //winRent(*playerMap[curSpace.find_owner()], 4*movement);
+                break;
+            }
+            case 3: break;
+        }
+    }
+    if (netWorth < 0) {
+        eliminated = true;
+        //std::cout << name << "has been eliminated!" << std::endl;
+    }
+    if (doubles == 1){
+            turn();
+}
+            if(doubles == 2){
+                turn();
+            }
+               if(doubles == 3){
+                   location = 11;
+                   academicProbation = 3;
 
-//            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
-//                payRent(4*movement);
-//                winRent(*playerMap[curSpace.find_owner()], 4*movement);
-//                break;
-//            }
-//            case 3: break;
-//        }
-//    }
-//    if (netWorth < 0) {
-//        eliminated = true;
-//        //std::cout << name << "has been eliminated!" << std::endl;
-//    }
-//    if (doubles == 1){
-//            turn();
-//}
-//            if(doubles == 2){
-//                turn();
-//            }
-//               if(doubles == 3){
-//                   location = 11;
-//                   academicProbation = 3;
-//                   return;
-//               }
-//            return;
-//    }
+               }
 
+    if(money < 0){
+        netWorth = netWorth + money*.5;
 
-
-
-//void player::rollDice(){
-//    //if player rolls doubles 3 times in a row
-//    if (dropLowestMidterm == true && academicProbation > 0) {
-//        academicProbation = 0;
-//        dropLowestMidterm = false;
-//    }
-//    if (doubles == 3) {
-//        academicProbation = 3;
-//        location = 11;
-//        return;
-//    }
-
-//    srand(time(NULL));
-
-//    int dice1 = (rand() % 6) + 1;
-//    int dice2 = (rand() % 6) + 1;
-
-//    int diceTotal = dice1 + dice2;
-
-//    if (dice1 == dice2) {
-//        doubles = doubles + 1;
-//    }
-//    if (academicProbation > 0) {
-//        if(doubles == 0){
-//            return;
-//        }
-//        else if(doubles == 1){
-//            location = location + diceTotal;
-//            doubles = 0;
-//            return;
-//        }
-//    }
-//    location = location + diceTotal;
-//    if (location +  > 40) {
-//        money += 200;
-//        location = location - 40;
-//    }
-//}
-
-//std::string player::get_playerName(){
-//    return name;
-//}
-
-//int player::get_location(){
-//    return location;
-//}
+}
+    }
 
 
 
+
+void player::rollDice(){
+//    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+//    std::default_random_engine generator(seed);
+    //if player rolls doubles 3 times in a row
+    if (dropLowestMidterm == true && academicProbation > 0) {
+        academicProbation = 0;
+        dropLowestMidterm = false;
+    }
+    if (doubles == 3) {
+        academicProbation = 3;
+        location = 11;
+        return;
+    }
+
+//    std::srand(time(NULL));
+//    rand();
+
+    int dice1 = (rand() % 6) + 1;
+    int dice2 = (rand() % 6) + 1;
+
+//    std::vector<int> diceRolls;
+//    diceRolls.push_back(dice1);
+//    diceRolls.push_back(dice2);
+//    diceRolls.push_back(dice3);
+//    diceRolls.push_back(dice4);
+//    diceRolls.push_back(dice5);
+//    diceRolls.push_back(dice6);
+//    diceRolls.push_back(dice7);
+//    diceRolls.push_back(dice8);
+
+    movement = dice1 + dice2;
+
+    if (dice1 == dice2) {
+        doubles = doubles + 1;
+    }
+    if (academicProbation > 0) {
+        if(doubles == 0){
+            return;
+        }
+        else if(doubles == 1){
+            location = location + movement;
+            doubles = 0;
+            return;
+        }
+    }
+
+    location = location + movement;
+    if (location > 40) {
+        money += 200;
+        netWorth +=200;
+        location = location - 40;
+    }
+    else location = location + movement;
+
+
+}
+
+
+
+void player::turn2(){
+
+    if (eliminated == true) {
+        return;
+    }
+    doubles = 0;
+    if (academicProbation == 0) {
+        roll2Dice();
+    }
+    space curSpace = board[location - 1];
+
+    //find out the space type (property, tax, community chest, etc
+    int curType = curSpace.get_type();
+    if (curType == 1) {
+    switch (1) {
+    case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+            std::string choice;
+            QString ok = "Do you want to buy the " + QString::fromStdString(curSpace.get_name()) + " for $" + QString::number(curSpace.get_price()) + "? (y/n)";
+
+            if(choice == "y"){
+                curSpace.purchased(getTag());
+                buyProperty(curSpace.get_price(), curSpace);
+            }
+            //we will assume everyone buys open property, but it would be possible to program in different personalities (frugal vs gung-ho) or give the user a choice
+            else{
+                curSpace.purchased(getTag());
+                buyProperty(curSpace.get_price(), curSpace);
+            }
+        break;
+    }
+
+    case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+            payRent(curSpace.get_rent());
+        break;
+        }
+        case 3: break;
+    }
+    }
+        //Properties are type 1, Community Chest are type 2, Chance Deck are type 3, Fines are Type 4, Transportation is type 5, Utility is type 6
+    if (curType == 2) {
+        communityDraw();
+    }
+    if (curType == 3) {
+        chanceDraw();
+    }
+    if (curType == 4) {
+        money -= 200;
+        netWorth -=200;
+    }
+    if (curType == 5) {
+        switch (1) {
+
+            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+                std::string choice;
+                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
+                //std::cin >> choice;
+                if(choice == "y"){
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                else{
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                break;
+            }
+
+            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+                payRent(curSpace.get_rent());
+                //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+                break;
+            }
+            case 3: break;
+        }
+    }
+    if (curType == 6) {
+        switch (1) {
+            case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
+                std::string choice;
+                //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
+                //std::cin >> choice;
+                if(choice == "y"){
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                else{
+                    curSpace.purchased(getTag());
+                    buyProperty(curSpace.get_price(),curSpace);
+                }
+                break;
+            }
+
+            case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
+                payRent(4*movement);
+                break;
+            }
+            case 3: break;
+        }
+    }
+    if (netWorth < 0) {
+        eliminated = true;
+
+    }
+    if (doubles == 1){
+            turn();
+}
+            if(doubles == 2){
+                turn();
+            }
+               if(doubles == 3){
+                   location = 11;
+                   academicProbation = 3;
+
+               }
+     //if a player has negative cash, but still has non-liquidated assets in the form of property, their net worth goes down through interest.
+     if(money < 0){
+         netWorth = netWorth + money*.7; //money is negative so adding it will decrease net worth. The 0.7 coefficient was chosen relatively arbitrarily
+      }
+    }
+
+void player::roll2Dice(){
+
+    //dropLowestMidterm is equalivent to a get out of jail free card, where academic probation is equivalent to jail
+    if (dropLowestMidterm == true && academicProbation > 0) {
+        academicProbation = 0;
+        dropLowestMidterm = false;
+    }
+    if (doubles == 3) {
+        academicProbation = 3;
+        location = 11;
+        return;
+    }
+
+    rand();
+    rand();
+
+    int dice3 = (rand() % 6) + 1;
+    int dice4 = (rand() % 6) + 1;
+
+
+    movement = dice3 + dice4;
+
+    if (dice3 == dice4) {
+        doubles = doubles + 1;
+    }
+    if (academicProbation > 0) {
+        if(doubles == 0){
+            return;
+        }
+        else if(doubles == 1){
+            location = location + movement;
+            doubles = 0;
+            return;
+        }
+    }
+
+    if (location + movement >= 40) {
+        money += 200;
+        netWorth +=200;
+        location = location + movement;
+        location = location - 40;
+    }
+    location = location + movement;
+}
+
+std::string player::get_playerName(){
+    return name;
+}
+
+int player::get_location(){
+    return location;
+}
