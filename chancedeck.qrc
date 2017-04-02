@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/chancedeckphoto">
+        <file>monopoly_card21.jpg</file>
+    </qresource>
+</RCC>

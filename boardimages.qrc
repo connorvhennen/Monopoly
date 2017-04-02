@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/boardpix">
+        <file>zbt.png</file>
+        <file>geneblock.png</file>
+        <file>spaulding.png</file>
+        <file>luskin.png</file>
+        <file>patrick.png</file>
+        <file>uber.jpg</file>
+        <file>ackerman.png</file>
+        <file>uber.png</file>
+        <file>kerchoff.png</file>
+        <file>kerckhoff.jpg</file>
+        <file>usac.png</file>
+        <file>goToJail.png</file>
+        <file>mathscience.png</file>
+        <file>powell.png</file>
+        <file>royce.png</file>
+        <file>lyft.jpg</file>
+        <file>northernlights.jpeg</file>
+        <file>imfield.png</file>
+        <file>parking.jpg</file>
+        <file>sunset.jpg</file>
+        <file>hedrick.jpg</file>
+        <file>rende.jpg</file>
+        <file>bplate.jpg</file>
+        <file>laxflyaway.jpg</file>
+        <file>bfit.jpg</file>
+        <file>yrl1.jpg</file>
+        <file>UCLA_tennis_courts.jpg</file>
+        <file>yrl outlet.png</file>
+        <file>inverted fountain.jpg</file>
+        <file>academic prob.jpg</file>
+        <file>sculpture.jpg</file>
+        <file>Janss_Steps,_UCLA.jpg</file>
+        <file>wooden.jpeg</file>
+        <file>in n out.jpg</file>
+        <file>textbook fee.jpeg</file>
+        <file>bruinwalk.jpg</file>
+    </qresource>
+</RCC>

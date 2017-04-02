@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/uclaFreeAnd4Sale">
+        <file>freeandforsale.jpg</file>
+    </qresource>
+</RCC>
