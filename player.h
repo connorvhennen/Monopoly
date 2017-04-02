@@ -60,6 +60,9 @@ public:
         doubles = 0;
         dropLowestMidterm = false;
 
+        /*the player class constructor inserts a pair into the playerMap, where a player's tag
+        can be used to retrieve the exact player object
+        */
         playerMap.insert(std::pair<int,player*>(playerTag,this));
         playerTag = playerTag + 1;
         eliminated = false;
@@ -104,6 +107,8 @@ private:
 
 };
 
+
+//templated comparison class, will be used for sorting (shuffling) the chance and community card decks.
 template <typename T>
 class RandomOrder{
 public:

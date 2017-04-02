@@ -20,23 +20,6 @@
 #include <vector>
 
 
-
-//std::vector<chanceCard> shuffleChanceDeck(){
-//    srand( static_cast<time_t>(time(0)));
-//    std::vector<chanceCard> myChanceDeck = wholeChanceDeck;
-
-//    std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
-
-//    return myChanceDeck;
-//}
-
-//std::vector<chanceCard> gameChanceDeck = shuffleChanceDeck();
-
-//struct gamechancedeck{
-//    chanceCard aCard;
-//    std::vector<chanceCard> chnceDeck = aCard.shuffleChanceDeck();
-//};
-
 int playerTag = 1;
 
 std::map<int,player*> playerMap;
@@ -49,11 +32,6 @@ void player::buyProperty(int cost, space mine){
     board[location - 1].owner = 1;
 }
 
-//space player::getSpaceInfo(space a){
-//    space cur = a;
-//    return cur;
-//}
-
 int player::getTag(){
     return tag;
 }
@@ -65,15 +43,11 @@ void player::payRent(int rentLoss){
 
 }
 
-//void player::winRent(player& winner, int rentWin){
-//    winner.money = winner.money + rentWin;
-//}
-
-
 void player::communityDraw(){
 
     std::vector<communityCard> myCommunityDeck(communityDeck);
 
+    //Example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
     std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
 
 
@@ -117,21 +91,14 @@ void player::communityDraw(){
 
 void player::chanceDraw(){
 
-//        srand( static_cast<time_t>(time(0)));
+
         std::vector<chanceCard> myChanceDeck = chanceDeck;
 
+        //Another example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
         std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
 
 
         chanceCard cardDrawn = *myChanceDeck.begin();
-        //myChanceDeck.pop_back();
-
-//        if (myChanceDeck.size() == 0) {
-
-//            myChanceDeck = wholeChanceDeck;
-
-//            std::sort(myChanceDeck.begin(),myChanceDeck.end(),RandomOrder<chanceCard>());
-//        }
 
         switch (1) {
             case 1: if(cardDrawn.type == 1){
@@ -202,10 +169,6 @@ void player::chanceDraw(){
 
 void player::turn(){
 
-    // initialize seed for random integer generator
-//        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-//        std::default_random_engine generator(seed);
-
     if (eliminated == true) {
         return;
     }
@@ -221,15 +184,13 @@ void player::turn(){
     switch (1) {
     case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
             std::string choice;
-            QString ok = "Do you want to buy the " + QString::fromStdString(curSpace.get_name()) + " for $" + QString::number(curSpace.get_price()) + "? (y/n)";
-//            gamescreen::buyProp = ok;
 
-            //Ui::gamescreen ui -> label -> setText(buyProp);
-            //std::cin >> choice;
             if(choice == "y"){
                 curSpace.purchased(getTag());
                 buyProperty(curSpace.get_price(), curSpace);
             }
+            /* we will assume for now that everyone buys open property, but it would be possible
+            to program in different personalities (frugal vs gung-ho) or give the user a choice*/
             else{
                 curSpace.purchased(getTag());
                 buyProperty(curSpace.get_price(), curSpace);
@@ -239,7 +200,7 @@ void player::turn(){
 
     case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
             payRent(curSpace.get_rent());
-            //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+
         break;
         }
         case 3: break;
@@ -276,7 +237,7 @@ void player::turn(){
 
             case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
                 payRent(curSpace.get_rent());
-                //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+
                 break;
             }
             case 3: break;
@@ -284,13 +245,7 @@ void player::turn(){
     }
     if (curType == 6) {
         switch (1) {
-                //            case <#constant#>:
-                //                <#statements#>
-                //                break;
-                //
-                //            default:
-                //                break;
-                //        }
+
             case 1: if (curSpace.find_owner() == 0 && curSpace.get_price() <= money) {
                 std::string choice;
                 //std::cout << "Do you want to buy the " << curSpace.get_name() << " for $" <<curSpace.get_price() << "? (y/n)";
@@ -308,7 +263,7 @@ void player::turn(){
 
             case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
                 payRent(4*movement);
-                //winRent(*playerMap[curSpace.find_owner()], 4*movement);
+
                 break;
             }
             case 3: break;
@@ -316,7 +271,7 @@ void player::turn(){
     }
     if (netWorth < 0) {
         eliminated = true;
-        //std::cout << name << "has been eliminated!" << std::endl;
+
     }
     if (doubles == 1){
             turn();
@@ -340,9 +295,7 @@ void player::turn(){
 
 
 void player::rollDice(){
-//    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-//    std::default_random_engine generator(seed);
-    //if player rolls doubles 3 times in a row
+
     if (dropLowestMidterm == true && academicProbation > 0) {
         academicProbation = 0;
         dropLowestMidterm = false;
@@ -353,21 +306,9 @@ void player::rollDice(){
         return;
     }
 
-//    std::srand(time(NULL));
-//    rand();
-
     int dice1 = (rand() % 6) + 1;
     int dice2 = (rand() % 6) + 1;
 
-//    std::vector<int> diceRolls;
-//    diceRolls.push_back(dice1);
-//    diceRolls.push_back(dice2);
-//    diceRolls.push_back(dice3);
-//    diceRolls.push_back(dice4);
-//    diceRolls.push_back(dice5);
-//    diceRolls.push_back(dice6);
-//    diceRolls.push_back(dice7);
-//    diceRolls.push_back(dice8);
 
     movement = dice1 + dice2;
 
@@ -421,7 +362,7 @@ void player::turn2(){
                 curSpace.purchased(getTag());
                 buyProperty(curSpace.get_price(), curSpace);
             }
-            //we will assume everyone buys open property, but it would be possible to program in different personalities (frugal vs gung-ho) or give the user a choice
+
             else{
                 curSpace.purchased(getTag());
                 buyProperty(curSpace.get_price(), curSpace);
@@ -467,7 +408,7 @@ void player::turn2(){
 
             case 2: if (curSpace.find_owner() > 0 && curSpace.find_owner() != getTag()){
                 payRent(curSpace.get_rent());
-                //winRent(*playerMap[curSpace.find_owner()], curSpace.get_rent());
+
                 break;
             }
             case 3: break;

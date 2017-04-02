@@ -230,17 +230,11 @@ gamescreen::gamescreen(QWidget *parent) :
     QImage comPic(":/uclaFreeAnd4Sale/freeandforsale.jpg");
     QImage comPic2 = comPic.scaled(150, 100, Qt::KeepAspectRatio);
     QImage chancePic2 = chancePic.scaled(80, 100, Qt::KeepAspectRatio);
-    //ui -> label_238 -> setScaledContents(true);
+
     ui -> label_240 -> setScaledContents(true);
     ui -> label_240 -> setPixmap(QPixmap::fromImage(comPic2));
     ui -> label_239-> setScaledContents(true);
     ui -> label_239 -> setPixmap(QPixmap::fromImage(chancePic2));
-   // std::for_each(playerMap.begin() -> second,playerMap.end() -> second,createPlayerWidget);
-    //ui -> label1 ->geo
-
-//    ui -> graphicsView -> fram
-//    QFrame::Shape cirle;
-//   ui -> graphicsView ->setFrameShape(cirle);
 
     ui -> horizontalSlider -> setValue(10);
     ui -> horizontalSlider -> setMaximum(10);
@@ -391,8 +385,16 @@ gamescreen::gamescreen(QWidget *parent) :
     ui ->stackedWidget_2 ->hide();
     ui ->stackedWidget_3 ->hide();
 
+
     player("P1",1,1500);
     player("P2",1,1500);
+
+    /*
+     The player class constructor maps a key (playerTag) to a value (player) in the playerMap map
+    We can retrieve the player objects that have been constructed, and name them as well, using
+    iterators and pointing to the second value for each key-value set in the map, thus pointing
+    to the player object.
+    */
     std::map<int, player*>::iterator itBegin;
     itBegin = playerMap.begin();
     player p1 = *itBegin -> second;
