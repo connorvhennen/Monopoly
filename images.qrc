@@ -1,0 +1,80 @@
+<RCC>
+    <qresource prefix="/myImages">
+        <file>uclaDrone.png</file>
+        <file>../Desktop/bruinwalk.jpg</file>
+        <file>../Desktop/textbook fee.jpeg</file>
+        <file>../Desktop/in n out.jpg</file>
+        <file>../Desktop/taxi.png</file>
+        <file>../Desktop/wooden.jpeg</file>
+        <file>../Desktop/Janss_Steps,_UCLA.jpg</file>
+        <file>../Desktop/sculpture.jpg</file>
+        <file>../Desktop/inverted fountain.jpg</file>
+        <file>../Desktop/yrl outlet.png</file>
+        <file>../Desktop/UCLA_tennis_courts.jpg</file>
+        <file>../Desktop/yrl1.jpg</file>
+        <file>../Desktop/bfit.jpg</file>
+        <file>../Desktop/laxflyaway.jpg</file>
+        <file>../Desktop/bplate.jpg</file>
+        <file>../Desktop/rende.jpg</file>
+        <file>../Desktop/hedrick.jpg</file>
+        <file>../Desktop/parking.jpg</file>
+        <file>../Desktop/sunset.jpg</file>
+        <file>../Desktop/imfield.png</file>
+        <file>../Desktop/northernlights.jpeg</file>
+        <file>../Desktop/lyft.jpg</file>
+        <file>../Desktop/royce.png</file>
+        <file>../Desktop/powell.png</file>
+        <file>../Desktop/goToJail.png</file>
+        <file>../Desktop/mathscience.png</file>
+        <file>../Desktop/kerchoff.png</file>
+        <file>../Desktop/kerckhoff.jpg</file>
+        <file>../Desktop/usac.png</file>
+        <file>../Desktop/ackerman.png</file>
+        <file>../Desktop/uber.png</file>
+        <file>../Desktop/uber.jpg</file>
+        <file>../Desktop/patrick.png</file>
+        <file>../Desktop/luskin.png</file>
+        <file>../Desktop/geneblock.png</file>
+        <file>../Desktop/spaulding.png</file>
+        <file>../Desktop/zbt.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>../Desktop/zbt.png</file>
+        <file>../Desktop/spaulding.png</file>
+        <file>../Desktop/geneblock.png</file>
+        <file>../Desktop/luskin.png</file>
+        <file>../Desktop/patrick.png</file>
+        <file>../Desktop/ackerman.png</file>
+        <file>../Desktop/uber.png</file>
+        <file>../Desktop/bruinwalk.jpg</file>
+        <file>../Desktop/textbook fee.jpeg</file>
+        <file>../Desktop/in n out.jpg</file>
+        <file>../Desktop/taxi.png</file>
+        <file>../Desktop/wooden.jpeg</file>
+        <file>../Desktop/Janss_Steps,_UCLA.jpg</file>
+        <file>../Desktop/sculpture.jpg</file>
+        <file>../Desktop/academic prob.jpg</file>
+        <file>../Desktop/inverted fountain.jpg</file>
+        <file>../Desktop/yrl outlet.png</file>
+        <file>../Desktop/UCLA_tennis_courts.jpg</file>
+        <file>../Desktop/yrl1.jpg</file>
+        <file>../Desktop/bfit.jpg</file>
+        <file>../Desktop/laxflyaway.jpg</file>
+        <file>../Desktop/bplate.jpg</file>
+        <file>../Desktop/rende.jpg</file>
+        <file>../Desktop/hedrick.jpg</file>
+        <file>../Desktop/parking.jpg</file>
+        <file>../Desktop/sunset.jpg</file>
+        <file>../Desktop/imfield.png</file>
+        <file>../Desktop/northernlights.jpeg</file>
+        <file>../Desktop/lyft.jpg</file>
+        <file>../Desktop/royce.png</file>
+        <file>../Desktop/powell.png</file>
+        <file>../Desktop/goToJail.png</file>
+        <file>../Desktop/mathscience.png</file>
+        <file>../Desktop/kerchoff.png</file>
+        <file>../Desktop/usac.png</file>
+        <file>../Desktop/kerckhoff.jpg</file>
+        <file>../Desktop/uber.jpg</file>
+    </qresource>
+</RCC>
