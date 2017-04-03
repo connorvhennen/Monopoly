@@ -5679,9 +5679,9 @@
     <widget class="QLabel" name="winnerlabel">
      <property name="geometry">
       <rect>
-       <x>159</x>
+       <x>119</x>
        <y>95</y>
-       <width>671</width>
+       <width>801</width>
        <height>301</height>
       </rect>
      </property>

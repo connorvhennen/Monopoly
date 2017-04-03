@@ -317,10 +317,12 @@ void player::rollDice(){
     }
     if (academicProbation > 0) {
         if(doubles == 0){
+            academicProbation = academicProbation - 1;
             return;
         }
         else if(doubles == 1){
             location = location + movement;
+            academicProbation = 0;
             doubles = 0;
             return;
         }
@@ -491,6 +493,7 @@ void player::roll2Dice(){
         else if(doubles == 1){
             location = location + movement;
             doubles = 0;
+            academicProbation = 0;
             return;
         }
     }
