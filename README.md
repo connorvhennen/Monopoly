@@ -27,16 +27,17 @@ I use iterators to shuffle the chance and community card decks, by passing in a 
 
 From player.cpp:
 
-void player::communityDraw(){
- //Example of generic algorithm use, and a templated class 
- //that handles the "comparisons" (not really comparing any 
- //two objects, totally random) for sorting (aka shuffling the deck!)
-    std::vector<communityCard> myCommunityDeck(communityDeck);
+    void player::communityDraw(){
+ 
+        //Example of generic algorithm use, and a templated class 
+        //that handles the comparisons -not really comparing any 
+        //two objects, totally random- for sorting aka shuffling the deck!
+        std::vector<communityCard> myCommunityDeck(communityDeck);
    
-    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
-    communityCard cardDrawn = *myCommunityDeck.begin();
-    //rest of communityDraw function
-}
+        std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+        communityCard cardDrawn = *myCommunityDeck.begin();
+        //rest of communityDraw function
+    }
 
 --------------------------------------Concept 2: Generic algorithms--------------------------------------------
 
