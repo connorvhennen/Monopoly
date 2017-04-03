@@ -200,25 +200,20 @@ Same for communityCard (from communityChest.h):
     };
 
 -----------Concept 5: Used version control (Github) to manage and keep track of edits---------------------
+
 As you can see I have 5 brances and well over 100 commits between all of them. I used different branches to evolve and store C++ backend code, user interface code, and to add functionality to the game, without risking making an error and ruining what I'd already built.
 
 ----------------------------------------Concept 6: Qt-------------------------------------------------------
 
 This was, perhaps ironically, the most difficult and time-consuming part of the project for me. I coded the original program just using XCode, which allowed easy communication (a big part of the Monopoly) with the user using simple std::cin and std::cout within any function. Qt however is very different in this respect, as functions must be connected to the Ui class in the right way, and I am much less familiar with Qt input Widgets than I am with XCode console streams. I am now proficient in this respect and will continue to implement more user communication.
 
-That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGridBox, QButton, QWidgets, QStackedWidgets, etc.
 
-
-Used iterators for playerMap
-Used generic algorithms, passing in iterators not containers, for shuffling of decks
-Used copy swap and move constructor for chance and community card decks
-Used templated comparison class to sort decks in random order (aka shuffle them)
-Used version control software to keep track of and organize my commits
-Used Qt to create a user interface for my game
-
-
---------------------------------------Concept 5: Inheritance and Polymorphism----------------------------
-
-The community card class inherits all of it's functionality from the chance card class. 
-
-From 
+-----------------------------------------------------------------------------------------------
+Summary: 
+• Used iterators for playerMap, to retreive player objects my reference
+• Used iterators to pass in a range for std::sort generic algorithm for card decks
+• Used generic algorithms to sort (in this case shuffle) card decks
+• Used copy swap idiom and move constructor for chance and community card decks
+• Used templated class to be the comparator paramater for the std::sort function on the decks 
+• Used version control software to keep track of and organize my commits
+• Used Qt to create a user interface for my game
