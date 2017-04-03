@@ -10,7 +10,10 @@
 
 #ifndef chanceDeck_hpp
 #define chanceDeck_hpp
+class chanceCard;
 
+const extern std::vector<chanceCard> wholeChanceDeck;
+extern std::vector<chanceCard> chanceDeck;
 
 class chanceCard{
 
@@ -29,7 +32,7 @@ public:
     }
 
     //swap function
-    void swap(chanceCard& other){
+    void swap(chanceCard other){
         std::swap(name,other.name);
         std::swap(price,other.price);
         std::swap(tag,other.tag);
@@ -38,7 +41,7 @@ public:
     }
 
     //assignment operator
-    chanceCard& operator=(chanceCard other)
+    chanceCard& operator=(const chanceCard& other)
     {
         swap(other);
         return *this;
@@ -69,7 +72,5 @@ private:
 
 };
 
-const extern std::vector<chanceCard> wholeChanceDeck;
-extern std::vector<chanceCard> chanceDeck;
 
 #endif

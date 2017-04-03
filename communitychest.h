@@ -16,6 +16,10 @@
 #ifndef communityChest_hpp
 #define communityChest_hpp
 
+class communityCard;
+const extern std::vector<communityCard> wholeCommunityDeck;
+extern std::vector<communityCard> communityDeck;
+
 class communityCard:public chanceCard{
 public:
 
@@ -33,7 +37,7 @@ public:
 }
 
     //swap function
-    void swap(communityCard& other){
+    void swap(communityCard other){
         std::swap(name,other.name);
         std::swap(price,other.price);
         std::swap(tag,other.tag);
@@ -42,7 +46,7 @@ public:
     }
 
     //assignment operator
-    communityCard& operator=(communityCard other)
+    communityCard& operator=(const communityCard& other)
     {
         swap(other);
         return *this;
@@ -73,7 +77,6 @@ private:
 
 };
 
-const extern std::vector<communityCard> wholeCommunityDeck;
-extern std::vector<communityCard> communityDeck;
+
 
 #endif /* communityChest_hpp */

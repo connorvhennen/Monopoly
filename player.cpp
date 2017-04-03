@@ -24,6 +24,18 @@ int playerTag = 1;
 
 std::map<int,player*> playerMap;
 
+player::player(){
+
+    location = 0;
+    money = 0;
+    academicProbation = 0;
+    acedMidterms = false;
+    dormArrest = false;
+    doubles = 0;
+    dropLowestMidterm = false;
+    netWorth = 0;
+
+}
 
 void player::buyProperty(int cost, space mine){
     money = money - cost;
@@ -45,10 +57,10 @@ void player::payRent(int rentLoss){
 
 void player::communityDraw(){
 
-    std::vector<communityCard> myCommunityDeck(communityDeck);
-
+    std::vector<communityCard> myCommunityDeck = communityDeck;
+    rand();
     //Example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
-    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard&>());
 
 
     communityCard cardDrawn = *myCommunityDeck.begin();
@@ -94,8 +106,9 @@ void player::chanceDraw(){
 
         std::vector<chanceCard> myChanceDeck = chanceDeck;
 
+        rand();
         //Another example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
-        std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
+        std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard&>());
 
 
         chanceCard cardDrawn = *myChanceDeck.begin();
@@ -175,6 +188,10 @@ void player::turn(){
     doubles = 0;
     if (academicProbation == 0) {
         rollDice();
+    }
+    if (academicProbation >= 1){
+        rollDice();
+        return;
     }
     space curSpace = board[location - 1];
 
@@ -289,6 +306,8 @@ void player::turn(){
         netWorth = netWorth + money*.5;
 
 }
+    dormArrest =false;
+    doubles = 0;
     }
 
 
@@ -300,6 +319,7 @@ void player::rollDice(){
         academicProbation = 0;
         dropLowestMidterm = false;
     }
+
     if (doubles == 3) {
         academicProbation = 3;
         location = 11;
@@ -350,6 +370,12 @@ void player::turn2(){
     if (academicProbation == 0) {
         roll2Dice();
     }
+    if (academicProbation > 0) {
+        roll2Dice();
+        return;
+    }
+
+
     space curSpace = board[location - 1];
 
     //find out the space type (property, tax, community chest, etc
@@ -459,6 +485,7 @@ void player::turn2(){
      if(money < 0){
          netWorth = netWorth + money*.7; //money is negative so adding it will decrease net worth. The 0.7 coefficient was chosen relatively arbitrarily
       }
+     doubles = 0;
     }
 
 void player::roll2Dice(){
