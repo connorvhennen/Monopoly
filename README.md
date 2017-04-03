@@ -100,8 +100,8 @@ Defined assignment operator using copy swap idiom for chance card class (and com
 
 From chanceDeck.h:
 
-class chanceCard{
-public:
+    class chanceCard{
+    public:
     //defaut constructor
     chanceCard()
         : name(""),tag(0),price(0),transfer(0),type(0)
