@@ -213,6 +213,7 @@ As you can see I have 5 brances and well over 100 commits between all of them. I
 
 This was, perhaps ironically, the most difficult and time-consuming part of the project for me. I coded the original program just using XCode, which allowed easy communication (a big part of the Monopoly) with the user using simple std::cin and std::cout within any function. Qt however is very different in this respect, as functions must be connected to the Ui class in the right way, and I am much less familiar with Qt input Widgets than I am with XCode console streams. I am now proficient in this respect and will continue to implement more user communication.
 
+That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGridBox, QButton, QWidgets, QStackedWidgets, etc.		
 
 --------------------------------------------------------------------------------------------------------------
     Summary: 
