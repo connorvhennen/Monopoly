@@ -4,7 +4,7 @@ I've created a basic user interface of the popular boardgame Monopoly with C++ a
 
 The PIC 10C concepts implemented include but are not limitied to:
 
-   ¶ Concept 1: Iterators--
+¶ Concept 1: Iterators--
 
 • Example 1: 
 
@@ -38,7 +38,7 @@ From player.cpp:
         //rest of communityDraw function
     }
 
-    ¶ Concept 2: Generic algorithms--
+¶ Concept 2: Generic algorithms--
 
  I used the generic algorithm std::sort, along with a custom comparator RandomOrder<T> to shuffle the community and chance card decks. 
  
@@ -92,7 +92,7 @@ Then, in player.cpp, as seen above:
      std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
      std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
 
-    ¶ Concept 4: Copy Swap Idiom, Move Semantics--
+¶ Concept 4: Copy Swap Idiom, Move Semantics--
 
 Defined assignment operator using copy swap idiom for chance card class (and community card class-see next concept). Also defined move constructor for both classes.
 
@@ -205,11 +205,11 @@ Same for communityCard (from communityChest.h):
 
     };
 
-    ¶ Concept 5: Used version control (Github) to manage and keep track of edits--
+¶ Concept 5: Used version control (Github) to manage and keep track of edits--
 
 As you can see I have 5 brances and well over 100 commits between all of them. I used different branches to evolve and store C++ backend code, user interface code, and to add functionality to the game, without risking making an error and ruining what I'd already built.
 
-    ¶ Concept 6: Qt--
+¶ Concept 6: Qt--
 
 This was, perhaps ironically, the most difficult and time-consuming part of the project for me. I coded the original program just using XCode, which allowed easy communication (a big part of the Monopoly) with the user using simple std::cin and std::cout within any function. Qt however is very different in this respect, as functions must be connected to the Ui class in the right way, and I am much less familiar with Qt input Widgets than I am with XCode console streams. I am now proficient in this respect and will continue to implement more user communication.
 
