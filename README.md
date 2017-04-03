@@ -70,7 +70,7 @@ From player.cpp:
         */
      }
 
-    ¶ Concept 3: Templates--
+¶ Concept 3: Templates--
 
 • Example 1: 
 
