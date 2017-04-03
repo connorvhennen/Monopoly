@@ -216,7 +216,7 @@ This was, perhaps ironically, the most difficult and time-consuming part of the 
 That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGridBox, QButton, QWidgets, QStackedWidgets, etc.		
 
 --------------------------------------------------------------------------------------------------------------
-    Summary: 
+    Summary of 10C Concepts Used: 
 
     • Used iterators for playerMap, to retreive player objects by reference
 
@@ -231,3 +231,4 @@ That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGrid
     • Used version control software to keep track of and organize my commits
 
     • Used Qt to create a user interface for my game
+  
