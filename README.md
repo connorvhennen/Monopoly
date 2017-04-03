@@ -27,16 +27,16 @@ I use iterators to shuffle the chance and community card decks, by passing in a 
 
 From player.cpp:
 
-void player::communityDraw(){
- //Example of generic algorithm use, and a templated class 
- //that handles the comparisons -not really comparing any 
- //two objects, totally random- for sorting aka shuffling the deck!
-    std::vector<communityCard> myCommunityDeck(communityDeck);
-   
-    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
-    communityCard cardDrawn = *myCommunityDeck.begin();
-    //rest of communityDraw function
-}
+    void player::communityDraw(){
+     //Example of generic algorithm use, and a templated class 
+     //that handles the comparisons -not really comparing any 
+     //two objects, totally random- for sorting aka shuffling the deck!
+        std::vector<communityCard> myCommunityDeck(communityDeck);
+
+        std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+        communityCard cardDrawn = *myCommunityDeck.begin();
+        //rest of communityDraw function
+    }
 
 --------------------------------------Concept 2: Generic algorithms--------------------------------------------
 
@@ -45,28 +45,28 @@ void player::communityDraw(){
  ----------------Example 1------------------: 
  From player.cpp:
  
- void player::communityDraw(){
- /*
- ..
- */
- std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
-  /*
- ..
- */
- }
+     void player::communityDraw(){
+     /*
+     ..
+     */
+     std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+      /*
+     ..
+     */
+     }
 
 --------------Example 2----------------------:
  From player.cpp:
  
- void player::chanceDraw(){
- /*
- ..
- */
-std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
-  /*
- ..
- */
- }
+     void player::chanceDraw(){
+        /*
+        ...
+        */
+        std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
+        /*
+        ...
+        */
+     }
  
 --------------------------------------Concept 3: Templates---------------------------------------------
 
@@ -76,20 +76,19 @@ I used a templated class to act as custom comparator for std::sort algorithms.
 
 From player.h:
 
-//templated comparison class, will be used for sorting (shuffling) the chance and community card decks.
-template <typename T>
-class RandomOrder{
-public:
-    bool operator()( const T& a, const T& b) const{
-
-        return ( rand() % 2 ) == 0 ? true : false ;
-    }
-};
+    //templated comparison class, will be used for sorting (shuffling) the chance and community card decks.
+    template <typename T>
+    class RandomOrder{
+    public:
+        bool operator()( const T& a, const T& b) const{
+            return ( rand() % 2 ) == 0 ? true : false ;
+        }
+    };
 
 Then, in player.cpp, as seen above:
 
- std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
- std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+     std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
+     std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
 
 --------------------------------------Concept 4: Copy Swap Idiom, Move Semantics----------------------------
 
@@ -107,7 +106,8 @@ public:
     }
 
     //copy constructor
-    chanceCard(const chanceCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
+    chanceCard(const chanceCard& other):name(other.name),tag(other.tag),
+    price(other.price),transfer(other.transfer),type(other.type)
     {
 
     }
@@ -135,71 +135,69 @@ public:
         swap(other);
     }
 
-/*
+    /*
 
 
-*/
-};
+    */
+    };
 
 --------------Example 2----------------------:
 Same for communityCard (from communityChest.h):
 
-class communityCard:public chanceCard{
-public:
+    class communityCard:public chanceCard{
+    public:
 
-//    //defaut constructor
-    communityCard():chanceCard(){}
-//        : name(""),tag(0),price(0),transfer(0),type(0)
-//    {
+    //    //defaut constructor
+        communityCard():chanceCard(){}
+    //        : name(""),tag(0),price(0),transfer(0),type(0)
+    //    {
 
-//    }
+    //    }
 
-//    //copy constructor
-    communityCard(const communityCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
-    {
+    //    //copy constructor
+        communityCard(const communityCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
+        {}
 
-}
+        //swap function
+        void swap(communityCard& other){
+            std::swap(name,other.name);
+            std::swap(price,other.price);
+            std::swap(tag,other.tag);
+            std::swap(transfer,other.transfer);
+            std::swap(type,other.type);
+        }
 
-    //swap function
-    void swap(communityCard& other){
-        std::swap(name,other.name);
-        std::swap(price,other.price);
-        std::swap(tag,other.tag);
-        std::swap(transfer,other.transfer);
-        std::swap(type,other.type);
-    }
+        //assignment operator
+        communityCard& operator=(communityCard other)
+        {
+            swap(other);
+            return *this;
+        }
 
-    //assignment operator
-    communityCard& operator=(communityCard other)
-    {
-        swap(other);
-        return *this;
-    }
+        //move constructor
+        communityCard(communityCard&& other)
+            : communityCard()
+        {
+            swap(other);
+        }
 
-    //move constructor
-    communityCard(communityCard&& other)
-        : communityCard()
-    {
-        swap(other);
-    }
+        communityCard(std::string n, int t, int ty, int p = 0, int tr = 0){
+            name = n;
+            tag = t;
+            type = ty;
+            price = p;
+            transfer = tr;
+        }
 
-    communityCard(std::string n, int t, int ty, int p = 0, int tr = 0){
-        name = n;
-        tag = t;
-        type = ty;
-        price = p;
-        transfer = tr;
-    }
+        std::string name;
+        int tag;
+        int price;
+        int transfer;
+        int type;
 
-    std::string name;
-    int tag;
-    int price;
-    int transfer;
-    int type;
+    private:
 
-private:
-
-};
+    };
 
 -----------Concept 5: Used version control (Github) to manage and keep track of edits---------------------
 As you can see I have 5 brances and well over 100 commits between all of them. I used different branches to evolve and store C++ backend code, user interface code, and to add functionality to the game, without risking making an error and ruining what I'd already built.
