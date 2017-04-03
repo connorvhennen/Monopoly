@@ -90,6 +90,56 @@ Then, in player.cpp, as seen above:
 
 --------------------------------------Concept 4: Copy Swap Idiom, Move Semantics----------------------------
 
+Defined assignment operator using copy swap idiom for chance card class (and community card class-see next concept). Also defined move constructor for both classes.
+
+From chanceDeck.h:
+
+class chanceCard{
+public:
+    //defaut constructor
+    chanceCard()
+        : name(""),tag(0),price(0),transfer(0),type(0)
+    {
+
+    }
+
+    //copy constructor
+    chanceCard(const chanceCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
+    {
+
+    }
+
+    //swap function
+    void swap(chanceCard& other){
+        std::swap(name,other.name);
+        std::swap(price,other.price);
+        std::swap(tag,other.tag);
+        std::swap(transfer,other.transfer);
+        std::swap(type,other.type);
+    }
+
+    //assignment operator
+    chanceCard& operator=(chanceCard other)
+    {
+        swap(other);
+        return *this;
+    }
+
+    //move constructor
+    chanceCard(chanceCard&& other)
+        : chanceCard()
+    {
+        swap(other);
+    }
+
+/*
+
+
+*/
+};
+
+
+
 
 Used iterators for playerMap
 Used generic algorithms, passing in iterators not containers, for shuffling of decks
@@ -99,4 +149,5 @@ Used version control software to keep track of and organize my commits
 Used Qt to create a user interface for my game
 
 
+--------------------------------------Concept 5: Inheritance and Polymorphism----------------------------
 
