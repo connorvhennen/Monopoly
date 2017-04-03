@@ -8,7 +8,12 @@
 
 gamescreen::gamescreen(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::gamescreen)
+    ui(new Ui::gamescreen),
+    a("p1",1,1500),
+    b("p2",1,1500),
+    c("p3",1,1500),
+    d("p4",1,1500)
+
 {
     ui->setupUi(this);
 
@@ -386,8 +391,8 @@ gamescreen::gamescreen(QWidget *parent) :
     ui ->stackedWidget_3 ->hide();
 
 
-    player("P1",1,1500);
-    player("P2",1,1500);
+    player("a",1,1500);
+    player("b",1,1500);
 
     /*
      The player class constructor maps a key (playerTag) to a value (player) in the playerMap map
@@ -397,9 +402,9 @@ gamescreen::gamescreen(QWidget *parent) :
     */
     std::map<int, player*>::iterator itBegin;
     itBegin = playerMap.begin();
-    player p1 = *itBegin -> second;
+    a = *itBegin -> second;
     ++itBegin;
-    player p2 = *itBegin -> second;
+    b = *itBegin -> second;
 
     ui ->widget_5 -> hide();
     ui -> widget_5 ->hide();
@@ -412,28 +417,26 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->spinBox_3,SIGNAL(valueChanged(int)),ui ->horizontalSlider_7,SLOT(setValue(int)));
     connect(ui ->spinBox_4,SIGNAL(valueChanged(int)),ui ->verticalSlider_5,SLOT(setValue(int)));
 
-    playerTurn(p1);
+//    playerTurn();
 
 
-
+    connect(ui ->pushButton_5,SIGNAL(clicked()),this,SLOT(playerTurn()));
+    connect(ui ->pushButton_5,SIGNAL(clicked()),this,SLOT(player2Turn()));
     connect(ui ->pushButton_5,SIGNAL(clicked()),ui -> widget_2,SLOT(show()));
-
-
-
-
-
-    player2Turn(p2);
     connect(ui ->pushButton_3,SIGNAL(clicked()),ui -> widget_3,SLOT(show()));
 
-    playerTurn2(p1);
+
+    connect(ui ->pushButton_12,SIGNAL(clicked()),this,SLOT(playerTurn2()));
     connect(ui ->pushButton_12,SIGNAL(clicked()),ui -> widget_5,SLOT(show()));
 
-     player2Turn2(p2);
+    connect(ui -> pushButton_13, SIGNAL(clicked()),this,SLOT(player2Turn2()));
     connect(ui -> pushButton_13, SIGNAL(clicked()),ui ->widget_6,SLOT(show()));
+
 
     connect(ui -> pushButton_11,SIGNAL(clicked()), ui ->page_5, SLOT(show()));
 
-    playerTurn3(p1);
+
+    connect(ui -> pushButton_18,SIGNAL(clicked()), this, SLOT(playerTurn3()));
     connect(ui ->pushButton_18, SIGNAL(clicked()), ui ->page, SLOT(show()));
     connect(ui ->pushButton_18, SIGNAL(clicked()), ui ->page_5, SLOT(deleteLater()));
 
@@ -442,7 +445,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_14,SIGNAL(clicked()),ui ->stackedWidget_3, SLOT(show()));
     connect(ui ->pushButton_14,SIGNAL(clicked()),ui ->page_6, SLOT(show()));
 
-    player2Turn3(p2);
+    connect(ui ->pushButton_19,SIGNAL(clicked()),this, SLOT(player2Turn3()));
     connect(ui ->pushButton_19,SIGNAL(clicked()),ui ->stackedWidget_2, SLOT(show()));
     connect(ui ->pushButton_19,SIGNAL(clicked()),ui ->page_3, SLOT(show()));
     connect(ui ->pushButton_19,SIGNAL(clicked()),ui ->stackedWidget_3, SLOT(hide()));
@@ -453,7 +456,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui -> pushButton_16, SIGNAL(clicked()), ui ->stackedWidget_2, SLOT(hide()));
     connect(ui -> pushButton_16, SIGNAL(clicked()), ui ->page_3, SLOT(deleteLater()));
 
-    playerTurn4(p1);
+    connect(ui ->pushButton_20,SIGNAL(clicked()), this,SLOT(playerTurn4()));
     connect(ui ->pushButton_20,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_20,SIGNAL(clicked()), ui ->page_2,SLOT(show()));
     connect(ui ->pushButton_20,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -465,7 +468,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_15,SIGNAL(clicked()), ui ->page_8,SLOT(show()));
 
 
-    player2Turn4(p2);
+
+    connect(ui ->pushButton_21,SIGNAL(clicked()), this,SLOT(player2Turn4()));
     connect(ui ->pushButton_21,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
     connect(ui ->pushButton_21,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_21,SIGNAL(clicked()), ui ->page_4,SLOT(show()));
@@ -477,7 +481,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui -> pushButton_17, SIGNAL(clicked()), ui ->page_4, SLOT(deleteLater()));
 
 
-    playerTurn5(p1);
+    connect(ui ->pushButton_m1,SIGNAL(clicked()),this,SLOT(playerTurn5()));
     connect(ui ->pushButton_m1,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m1,SIGNAL(clicked()), ui ->page_9l,SLOT(show()));
     connect(ui ->pushButton_m1,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -487,7 +491,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l1,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l1,SIGNAL(clicked()), ui ->page_10m,SLOT(show()));
 
-    player2Turn5(p2);
+    connect(ui ->pushButton_m2,SIGNAL(clicked()), this,SLOT(player2Turn5()));
     connect(ui ->pushButton_m2,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m2,SIGNAL(clicked()), ui ->page_9r,SLOT(show()));
     connect(ui ->pushButton_m2,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -498,8 +502,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1,SIGNAL(clicked()), ui ->page_11m,SLOT(show()));
 
     //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn6(p1);
 
+    connect(ui ->pushButton_m3,SIGNAL(clicked()), this,SLOT(playerTurn6()));
     connect(ui ->pushButton_m3,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m3,SIGNAL(clicked()), ui ->page_10l,SLOT(show()));
     connect(ui ->pushButton_m3,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -511,7 +515,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l2,SIGNAL(clicked()), ui ->page_12m,SLOT(show()));
 
 
-    player2Turn6(p2);
+
+    connect(ui ->pushButton_m4,SIGNAL(clicked()), this,SLOT(player2Turn6()));
     connect(ui ->pushButton_m4,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m4,SIGNAL(clicked()), ui ->page_10r,SLOT(show()));
     connect(ui ->pushButton_m4,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -522,7 +527,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_2,SIGNAL(clicked()), ui ->page_13m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn7(p1);
+    playerTurn7();
     connect(ui ->pushButton_m5,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m5,SIGNAL(clicked()), ui ->page_11l,SLOT(show()));
     connect(ui ->pushButton_m5,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -533,7 +538,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l3,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l3,SIGNAL(clicked()), ui ->page_14m,SLOT(show()));
 
-    player2Turn7(p2);
+    player2Turn7();
     connect(ui ->pushButton_m6,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m6,SIGNAL(clicked()), ui ->page_11r,SLOT(show()));
     connect(ui ->pushButton_m6,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -546,7 +551,7 @@ gamescreen::gamescreen(QWidget *parent) :
 
 
     //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn8(p1);
+    playerTurn8();
     connect(ui ->pushButton_m7,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m7,SIGNAL(clicked()), ui ->page_12l,SLOT(show()));
     connect(ui ->pushButton_m7,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -557,7 +562,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l4,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l4,SIGNAL(clicked()), ui ->page_16m,SLOT(show()));
 
-    player2Turn8(p2);
+    player2Turn8();
     connect(ui ->pushButton_m8,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m8,SIGNAL(clicked()), ui ->page_12r,SLOT(show()));
     connect(ui ->pushButton_m8,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -569,7 +574,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_4,SIGNAL(clicked()), ui ->page_17m,SLOT(show()));
 
     //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn9(p1);
+    playerTurn9();
     connect(ui ->pushButton_m9,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m9,SIGNAL(clicked()), ui ->page_13l,SLOT(show()));
     connect(ui ->pushButton_m9,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -580,7 +585,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l5,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l5,SIGNAL(clicked()), ui ->page_18m,SLOT(show()));
 
-    player2Turn9(p2);
+    player2Turn9();
     connect(ui ->pushButton_m10,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m10,SIGNAL(clicked()), ui ->page_13r,SLOT(show()));
     connect(ui ->pushButton_m10,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -592,7 +597,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_5,SIGNAL(clicked()), ui ->page_19m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn10(p1);
+    playerTurn10();
     connect(ui ->pushButton_m11,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m11,SIGNAL(clicked()), ui ->page_14l,SLOT(show()));
     connect(ui ->pushButton_m11,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -602,7 +607,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l6,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l6,SIGNAL(clicked()), ui ->page_20m,SLOT(show()));
 
-    player2Turn10(p2);
+    player2Turn10();
     connect(ui ->pushButton_m12,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m12,SIGNAL(clicked()), ui ->page_14r,SLOT(show()));
     connect(ui ->pushButton_m12,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -614,7 +619,7 @@ gamescreen::gamescreen(QWidget *parent) :
 
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn11(p1);
+    playerTurn11();
     connect(ui ->pushButton_m13,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m13,SIGNAL(clicked()), ui ->page_15l,SLOT(show()));
     connect(ui ->pushButton_m13,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -624,7 +629,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l7,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l7,SIGNAL(clicked()), ui ->page_22m,SLOT(show()));
 
-    player2Turn11(p2);
+    player2Turn11();
     connect(ui ->pushButton_m14,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m14,SIGNAL(clicked()), ui ->page_15r,SLOT(show()));
     connect(ui ->pushButton_m14,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -636,7 +641,7 @@ gamescreen::gamescreen(QWidget *parent) :
 
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn12(p1);
+    playerTurn12();
     connect(ui ->pushButton_m15,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m15,SIGNAL(clicked()), ui ->page_16l,SLOT(show()));
     connect(ui ->pushButton_m15,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -646,7 +651,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l8,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l8,SIGNAL(clicked()), ui ->page_24m,SLOT(show()));
 
-    player2Turn12(p2);
+    player2Turn12();
     connect(ui ->pushButton_m16,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m16,SIGNAL(clicked()), ui ->page_16r,SLOT(show()));
     connect(ui ->pushButton_m16,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -657,7 +662,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_8,SIGNAL(clicked()), ui ->page_25m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn13(p1);
+    playerTurn13();
     connect(ui ->pushButton_m17,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17,SIGNAL(clicked()), ui ->page_17l,SLOT(show()));
     connect(ui ->pushButton_m17,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -668,7 +673,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l9,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l9,SIGNAL(clicked()), ui ->page_26m,SLOT(show()));
 
-    player2Turn13(p2);
+    player2Turn13();
     connect(ui ->pushButton_m17_2,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_2,SIGNAL(clicked()), ui ->page_17r,SLOT(show()));
     connect(ui ->pushButton_m17_2,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -680,7 +685,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_9,SIGNAL(clicked()), ui ->page_26m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn14(p1);
+    playerTurn14();
     connect(ui ->pushButton_m17_3,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_3,SIGNAL(clicked()), ui ->page_18l,SLOT(show()));
     connect(ui ->pushButton_m17_3,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -690,7 +695,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l10,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l10,SIGNAL(clicked()), ui ->page_27m,SLOT(show()));
 
-    player2Turn14(p2);
+    player2Turn14();
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->page_18r,SLOT(show()));
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -701,7 +706,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_10,SIGNAL(clicked()), ui ->page_28m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn15(p1);
+    playerTurn15();
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->page_19l,SLOT(show()));
     connect(ui ->pushButton_m17_4,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -711,7 +716,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l11,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l11,SIGNAL(clicked()), ui ->page_29m,SLOT(show()));
 
-    player2Turn15(p2);
+    player2Turn15();
     connect(ui ->pushButton_m17_5,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_5,SIGNAL(clicked()), ui ->page_19r,SLOT(show()));
     connect(ui ->pushButton_m17_5,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -722,7 +727,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_11,SIGNAL(clicked()), ui ->page_30m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    playerTurn16(p1);
+    playerTurn16();
     connect(ui ->pushButton_m17_6,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_6,SIGNAL(clicked()), ui ->page_20l,SLOT(show()));
     connect(ui ->pushButton_m17_6,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -732,7 +737,7 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l12,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l12,SIGNAL(clicked()), ui ->page_31m,SLOT(show()));
 
-    player2Turn16(p2);
+    player2Turn16();
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->page_20r,SLOT(show()));
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -743,8 +748,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_12,SIGNAL(clicked()), ui ->page_32m,SLOT(show()));
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    if(p1.netWorth >=0 && p2.netWorth >= 0){
-    playerTurn17(p1);
+    if(a.netWorth >=0 && a.netWorth >= 0){
+    playerTurn17();
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->page_21l,SLOT(show()));
     connect(ui ->pushButton_m17_7,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -754,8 +759,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l13,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l13,SIGNAL(clicked()), ui ->page_33m,SLOT(show()));
     }
-    if(p1.netWorth >=0 && p2.netWorth >= 0){
-    player2Turn17(p2);
+    if(a.netWorth >=0 && b.netWorth >= 0){
+    player2Turn17();
     connect(ui ->pushButton_m17_8,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_8,SIGNAL(clicked()), ui ->page_21r,SLOT(show()));
     connect(ui ->pushButton_m17_8,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -767,8 +772,8 @@ gamescreen::gamescreen(QWidget *parent) :
     }
 
 //----------------------------------------------------------------------------------------------------------------------------//
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    playerTurn18(p1);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+    playerTurn18();
     connect(ui ->pushButton_m17_9,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_9,SIGNAL(clicked()), ui ->page_22l,SLOT(show()));
     connect(ui ->pushButton_m17_9,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -779,8 +784,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l14,SIGNAL(clicked()), ui ->page_35m,SLOT(show()));
     }
 
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    player2Turn18(p2);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+    player2Turn18();
     connect(ui ->pushButton_m17_10,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_10,SIGNAL(clicked()), ui ->page_22r,SLOT(show()));
     connect(ui ->pushButton_m17_10,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -791,8 +796,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_14,SIGNAL(clicked()), ui ->page_36m,SLOT(show()));
     }
 //----------------------------------------------------------------------------------------------------------------------------//
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    playerTurn19(p1);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+    playerTurn19();
     connect(ui ->pushButton_m17_11,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_11,SIGNAL(clicked()), ui ->page_23l,SLOT(show()));
     connect(ui ->pushButton_m17_11,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -802,8 +807,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_l15,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l15,SIGNAL(clicked()), ui ->page_37m,SLOT(show()));
        }
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    player2Turn19(p2);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+    player2Turn19();
     connect(ui ->pushButton_m17_12,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_12,SIGNAL(clicked()), ui ->page_23r,SLOT(show()));
     connect(ui ->pushButton_m17_12,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -814,8 +819,8 @@ gamescreen::gamescreen(QWidget *parent) :
     connect(ui ->pushButton_r1_15,SIGNAL(clicked()), ui ->page_38m,SLOT(show()));
     }
 //----------------------------------------------------------------------------------------------------------------------------//
-if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    playerTurn20(p1);
+if(a.netWorth  >=0 && b.netWorth  >= 0){
+    playerTurn20();
     connect(ui ->pushButton_m17_13,SIGNAL(clicked()), ui ->stackedWidget,SLOT(show()));
     connect(ui ->pushButton_m17_13,SIGNAL(clicked()), ui ->page_24l,SLOT(show()));
     connect(ui ->pushButton_m17_13,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -826,8 +831,8 @@ if(p1.netWorth  >=0 && p2.netWorth  >= 0){
     connect(ui ->pushButton_l16,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(show()));
     connect(ui ->pushButton_l16,SIGNAL(clicked()), ui ->page_39m,SLOT(show()));
 }
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-    player2Turn20(p2);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+    player2Turn20();
     connect(ui ->pushButton_m17_14,SIGNAL(clicked()), ui ->stackedWidget_2,SLOT(show()));
     connect(ui ->pushButton_m17_14,SIGNAL(clicked()), ui ->page_24r,SLOT(show()));
     connect(ui ->pushButton_m17_14,SIGNAL(clicked()), ui ->stackedWidget_3,SLOT(hide()));
@@ -839,17 +844,17 @@ if(p1.netWorth  >=0 && p2.netWorth  >= 0){
     connect(ui ->pushButton_r1_16,SIGNAL(clicked()), ui ->page_40m,SLOT(show()));
 }
 
-    if(p1.netWorth  >=0 && p2.netWorth  >= 0){
-        getWinner(p1,p2);
+    if(a.netWorth  >=0 && b.netWorth  >= 0){
+        getWinner(a,b);
     }
 
-    if(p1.netWorth < 0 || p2.netWorth<0){
-        announceWinner(p1,p2);
+    if(a.netWorth < 0 || b.netWorth<0){
+        announceWinner(a,b);
     }
 
 }
 
-void gamescreen::playerTurn(player& a){
+void gamescreen::playerTurn(){
 
     a.turn();
     int playerLocation = a.location;
@@ -887,7 +892,7 @@ void gamescreen::playerTurn(player& a){
 
 }
 
-void gamescreen::playerTurn2(player& a){
+void gamescreen::playerTurn2(){
 
     a.turn();
     int playerLocation = a.location;
@@ -925,7 +930,7 @@ void gamescreen::playerTurn2(player& a){
 }
 
 
-void gamescreen::playerTurn3(player& a){
+void gamescreen::playerTurn3(){
 
     a.turn();
     int playerLocation = a.location;
@@ -963,7 +968,7 @@ void gamescreen::playerTurn3(player& a){
 
 }
 
-void gamescreen::playerTurn4(player& a){
+void gamescreen::playerTurn4(){
 
     a.turn();
 
@@ -983,7 +988,7 @@ void gamescreen::playerTurn4(player& a){
 }
 
 
-void gamescreen::playerTurn5(player& a){
+void gamescreen::playerTurn5(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1019,7 +1024,7 @@ void gamescreen::playerTurn5(player& a){
 
 }
 
-void gamescreen::playerTurn6(player& a){
+void gamescreen::playerTurn6(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1054,7 +1059,7 @@ void gamescreen::playerTurn6(player& a){
 
 }
 
-void gamescreen::playerTurn7(player& a){
+void gamescreen::playerTurn7(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1093,7 +1098,7 @@ void gamescreen::playerTurn7(player& a){
 
 }
 
-void gamescreen::playerTurn8(player& a){
+void gamescreen::playerTurn8(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1129,7 +1134,7 @@ void gamescreen::playerTurn8(player& a){
 
 }
 
-void gamescreen::playerTurn9(player& a){
+void gamescreen::playerTurn9(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1164,7 +1169,7 @@ void gamescreen::playerTurn9(player& a){
 }
 
 
-void gamescreen::playerTurn10(player& a){
+void gamescreen::playerTurn10(){
 a.turn();
 int playerLocation = a.location;
 if(a.location < 11){
@@ -1201,7 +1206,7 @@ ui ->label_l3_31 ->setText(netWorthDialogue);
 }
 
 
-void gamescreen::playerTurn11(player& a){
+void gamescreen::playerTurn11(){
 a.turn();
 int playerLocation = a.location;
 if(a.location < 11){
@@ -1235,7 +1240,7 @@ ui ->label_l3_6 ->setText(moneyDialogue);
 }
 
 
-void gamescreen::playerTurn12(player& a){
+void gamescreen::playerTurn12(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1269,7 +1274,7 @@ void gamescreen::playerTurn12(player& a){
 
 }
 
-void gamescreen::playerTurn13(player& a){
+void gamescreen::playerTurn13(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1302,7 +1307,7 @@ void gamescreen::playerTurn13(player& a){
     ui ->label_l3_8 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn14(player& a){
+void gamescreen::playerTurn14(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1335,7 +1340,7 @@ void gamescreen::playerTurn14(player& a){
     ui ->label_l3_9 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn15(player& a){
+void gamescreen::playerTurn15(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1371,7 +1376,7 @@ void gamescreen::playerTurn15(player& a){
     ui -> label_l2_31 ->setText(netWorthDialogue);
 }
 
-void gamescreen::playerTurn16(player& a){
+void gamescreen::playerTurn16(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1405,7 +1410,7 @@ void gamescreen::playerTurn16(player& a){
     ui ->label_l3_11 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn17(player& a){
+void gamescreen::playerTurn17(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1438,7 +1443,7 @@ void gamescreen::playerTurn17(player& a){
     ui ->label_l3_12 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn18(player& a){
+void gamescreen::playerTurn18(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1471,7 +1476,7 @@ void gamescreen::playerTurn18(player& a){
     ui ->label_l3_13 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn19(player& a){
+void gamescreen::playerTurn19(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1504,7 +1509,7 @@ void gamescreen::playerTurn19(player& a){
     ui ->label_l3_14 ->setText(moneyDialogue);
 }
 
-void gamescreen::playerTurn20(player& a){
+void gamescreen::playerTurn20(){
     a.turn();
     int playerLocation = a.location;
     if(a.location < 11){
@@ -1541,7 +1546,7 @@ void gamescreen::playerTurn20(player& a){
 
 
 
-void gamescreen::player2Turn(player& b){
+void gamescreen::player2Turn(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1556,7 +1561,7 @@ void gamescreen::player2Turn(player& b){
     ui ->label_9 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn2(player& b){
+void gamescreen::player2Turn2(){
 
     b.turn2();
 
@@ -1573,7 +1578,7 @@ void gamescreen::player2Turn2(player& b){
 
 }
 
-void gamescreen::player2Turn3(player& b){
+void gamescreen::player2Turn3(){
 
     b.turn2();
 
@@ -1591,7 +1596,7 @@ void gamescreen::player2Turn3(player& b){
 }
 
 
-void gamescreen::player2Turn4(player& b){
+void gamescreen::player2Turn4(){
 
 
     b.turn2();
@@ -1611,7 +1616,7 @@ void gamescreen::player2Turn4(player& b){
 
 
 
-void gamescreen::player2Turn5(player& b){
+void gamescreen::player2Turn5(){
 
     b.turn2();
     QString movement2Dialogue = QString::number(b.movement);
@@ -1628,9 +1633,10 @@ void gamescreen::player2Turn5(player& b){
     ui ->label_r3 -> setText(money2Dialogue);
     ui -> label_r3_17 ->setText(netWorth2Dialogue);
 
+
 }
 
-void gamescreen::player2Turn6(player& b){
+void gamescreen::player2Turn6(){
     b.turn2();
     QString movement2Dialogue = QString::number(b.movement);
 
@@ -1644,7 +1650,7 @@ void gamescreen::player2Turn6(player& b){
     ui ->label_r3_2 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn7(player& b){
+void gamescreen::player2Turn7(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1659,7 +1665,7 @@ void gamescreen::player2Turn7(player& b){
     ui ->label_r3_3 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn8(player& b){
+void gamescreen::player2Turn8(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1674,7 +1680,7 @@ void gamescreen::player2Turn8(player& b){
     ui ->label_r3_4 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn9(player& b){
+void gamescreen::player2Turn9(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1689,7 +1695,7 @@ void gamescreen::player2Turn9(player& b){
     ui ->label_r3_5 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn10(player& b){
+void gamescreen::player2Turn10(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1706,7 +1712,7 @@ void gamescreen::player2Turn10(player& b){
     ui -> label_r3_18 -> setText(netWorth2Dialogue);
 }
 
-void gamescreen::player2Turn11(player& b){
+void gamescreen::player2Turn11(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1721,7 +1727,7 @@ void gamescreen::player2Turn11(player& b){
     ui ->label_r3_7 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn12(player& b){
+void gamescreen::player2Turn12(){
     b.turn2();
 
 
@@ -1737,7 +1743,7 @@ void gamescreen::player2Turn12(player& b){
     ui ->label_r3_8 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn13(player& b){
+void gamescreen::player2Turn13(){
     b.turn2();
 
 
@@ -1753,7 +1759,7 @@ void gamescreen::player2Turn13(player& b){
     ui ->label_r3_9 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn14(player& b){
+void gamescreen::player2Turn14(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1768,7 +1774,7 @@ void gamescreen::player2Turn14(player& b){
     ui ->label_r3_10 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn15(player& b){
+void gamescreen::player2Turn15(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1783,7 +1789,7 @@ void gamescreen::player2Turn15(player& b){
     ui ->label_r3_11 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn16(player& b){
+void gamescreen::player2Turn16(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1798,7 +1804,7 @@ void gamescreen::player2Turn16(player& b){
     ui ->label_r3_12 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn17(player& b){
+void gamescreen::player2Turn17(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1813,7 +1819,7 @@ void gamescreen::player2Turn17(player& b){
     ui ->label_r3_13 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn18(player& b){
+void gamescreen::player2Turn18(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1828,7 +1834,7 @@ void gamescreen::player2Turn18(player& b){
     ui ->label_r3_14 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn19(player& b){
+void gamescreen::player2Turn19(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);
@@ -1843,7 +1849,7 @@ void gamescreen::player2Turn19(player& b){
     ui ->label_r3_15 -> setText(money2Dialogue);
 }
 
-void gamescreen::player2Turn20(player& b){
+void gamescreen::player2Turn20(){
     b.turn2();
 
     QString movement2Dialogue = QString::number(b.movement);

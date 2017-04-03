@@ -4232,7 +4232,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>49</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_5">
       <widget class="QPushButton" name="pushButton_18">

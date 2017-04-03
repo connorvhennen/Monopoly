@@ -24,6 +24,18 @@ int playerTag = 1;
 
 std::map<int,player*> playerMap;
 
+player::player(){
+
+    location = 0;
+    money = 0;
+    academicProbation = 0;
+    acedMidterms = false;
+    dormArrest = false;
+    doubles = 0;
+    dropLowestMidterm = false;
+    netWorth = 0;
+
+}
 
 void player::buyProperty(int cost, space mine){
     money = money - cost;
@@ -48,7 +60,7 @@ void player::communityDraw(){
     std::vector<communityCard> myCommunityDeck(communityDeck);
 
     //Example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
-    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard>());
+    std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard&>());
 
 
     communityCard cardDrawn = *myCommunityDeck.begin();
@@ -95,7 +107,7 @@ void player::chanceDraw(){
         std::vector<chanceCard> myChanceDeck = chanceDeck;
 
         //Another example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
-        std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard>());
+        std::sort(myChanceDeck.begin(), myChanceDeck.end(), RandomOrder<chanceCard&>());
 
 
         chanceCard cardDrawn = *myChanceDeck.begin();

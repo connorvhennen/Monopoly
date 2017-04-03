@@ -48,7 +48,7 @@ class player{
     friend class chanceCard;
     friend class mainwindow;
 public:
-
+    player();
 
     player(std::string title, int start=1, int inheritance=1500){
         name = title;
