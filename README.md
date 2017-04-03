@@ -138,7 +138,72 @@ public:
 */
 };
 
+--------------Example 2----------------------:
+Same for communityCard (from communityChest.h):
 
+class communityCard:public chanceCard{
+public:
+
+//    //defaut constructor
+    communityCard():chanceCard(){}
+//        : name(""),tag(0),price(0),transfer(0),type(0)
+//    {
+
+//    }
+
+//    //copy constructor
+    communityCard(const communityCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
+    {
+
+}
+
+    //swap function
+    void swap(communityCard& other){
+        std::swap(name,other.name);
+        std::swap(price,other.price);
+        std::swap(tag,other.tag);
+        std::swap(transfer,other.transfer);
+        std::swap(type,other.type);
+    }
+
+    //assignment operator
+    communityCard& operator=(communityCard other)
+    {
+        swap(other);
+        return *this;
+    }
+
+    //move constructor
+    communityCard(communityCard&& other)
+        : communityCard()
+    {
+        swap(other);
+    }
+
+    communityCard(std::string n, int t, int ty, int p = 0, int tr = 0){
+        name = n;
+        tag = t;
+        type = ty;
+        price = p;
+        transfer = tr;
+    }
+
+    std::string name;
+    int tag;
+    int price;
+    int transfer;
+    int type;
+
+private:
+
+};
+
+-----------Concept 5: Used version control (Github) to manage and keep track of edits---------------------
+As you can see I have 5 brances and well over 100 commits between all of them. I used different branches to evolve and store C++ backend code, user interface code, and to add functionality to the game, without risking making an error and ruining what I'd already built.
+
+----------------------------------------Concept 6: Qt-------------------------------------------------------
+
+This was perhaps ironically the most difficult and time-consuming part of 
 
 
 Used iterators for playerMap
@@ -151,3 +216,6 @@ Used Qt to create a user interface for my game
 
 --------------------------------------Concept 5: Inheritance and Polymorphism----------------------------
 
+The community card class inherits all of it's functionality from the chance card class. 
+
+From 
