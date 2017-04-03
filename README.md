@@ -227,7 +227,7 @@ That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGrid
 
     • Used generic algorithms to sort (in this case shuffle) card decks
 
-    • Used copy swap idiom and move constructor for chance and community card decks
+    • Used copy swap idiom and move constructor for chance and community card decks and player class
 
     • Used templated class to be the comparator paramater for the std::sort function on the decks 
 
