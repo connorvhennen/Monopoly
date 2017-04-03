@@ -13,6 +13,3 @@ chanceCard myChanceCards[] = {chanceCard("ZBT has been converted to 24-Hour Open
 
 std::vector<chanceCard> chanceDeck = wholeChanceDeck;
 
-
-
-

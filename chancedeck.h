@@ -11,6 +11,7 @@
 #ifndef chanceDeck_hpp
 #define chanceDeck_hpp
 
+
 class chanceCard{
 
 public:

@@ -11,25 +11,26 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+#include "chancedeck.h"
 
 #ifndef communityChest_hpp
 #define communityChest_hpp
 
-class communityCard{
+class communityCard:public chanceCard{
 public:
 
-    //defaut constructor
-    communityCard()
-        : name(""),tag(0),price(0),transfer(0),type(0)
-    {
+//    //defaut constructor
+    communityCard():chanceCard(){}
+//        : name(""),tag(0),price(0),transfer(0),type(0)
+//    {
 
-    }
+//    }
 
-    //copy constructor
+//    //copy constructor
     communityCard(const communityCard& other):name(other.name),tag(other.tag),price(other.price),transfer(other.transfer),type(other.type)
     {
 
-    }
+}
 
     //swap function
     void swap(communityCard& other){
