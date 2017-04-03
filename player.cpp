@@ -37,7 +37,7 @@ player::player(){
 
 }
 
-void player::buyProperty(int cost, space mine){
+void player::buyProperty(const int cost, const space mine){
     money = money - cost;
     landOwned.push_back(mine);
     netWorth = netWorth - 0.3*cost;
@@ -48,7 +48,7 @@ int player::getTag(){
     return tag;
 }
 
-void player::payRent(int rentLoss){
+void player::payRent(const int rentLoss){
     money = money - rentLoss;
     netWorth = netWorth - rentLoss;
 
@@ -57,7 +57,10 @@ void player::payRent(int rentLoss){
 
 void player::communityDraw(){
 
-    std::vector<communityCard> myCommunityDeck = communityDeck;
+    std::vector<communityCard> myCommunityDeck(16*sizeof(communityCard));
+    myCommunityDeck = wholeCommunityDeck;
+
+
     rand();
     //Example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
     std::sort(myCommunityDeck.begin(), myCommunityDeck.end(), RandomOrder<communityCard&>());
@@ -103,8 +106,8 @@ void player::communityDraw(){
 
 void player::chanceDraw(){
 
-
-        std::vector<chanceCard> myChanceDeck = chanceDeck;
+        std::vector<chanceCard> myChanceDeck(16*sizeof(communityCard));
+        myChanceDeck = wholeChanceDeck;
 
         rand();
         //Another example of generic algorithm use, and a templated class that handles the "comparisons" (not really comparing any two objects, totally random) for sorting (aka shuffling the deck!)
@@ -541,3 +544,4 @@ std::string player::get_playerName(){
 int player::get_location(){
     return location;
 }
+
