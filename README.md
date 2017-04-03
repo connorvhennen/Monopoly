@@ -204,6 +204,9 @@ Same for communityCard (from communityChest.h):
     private:
 
     };
+    
+• Example 3: 
+I also followed the copy swap idiom for the overloaded assignment operator for the player class.
 
 ¶ Concept 5: Used version control (Github) to manage and keep track of edits--
 
