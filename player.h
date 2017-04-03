@@ -19,6 +19,7 @@
 #include <QString>
 #include <QWidget>
 #include <string>
+#include <algorithm>
 
 
 class space;
@@ -49,6 +50,8 @@ class player{
     friend class mainwindow;
 public:
 
+    //default constructor
+    player();
 
     player(std::string title, int start=1, int inheritance=1500){
         name = title;
@@ -103,6 +106,35 @@ public:
     int netWorth;
     std::vector<space> landOwned;
 
+    void swap(player& other){
+           std::swap(name,other.name);
+           std::swap(tag,other.tag);
+           std::swap(location,other.location);
+           std::swap(academicProbation,other.academicProbation);
+           std::swap(acedMidterms,other.acedMidterms);
+           std::swap(money,other.money);
+           std::swap(netWorth,other.netWorth);
+           std::swap(eliminated,other.eliminated);
+           std::swap(dormArrest,other.dormArrest);
+           std::swap(dropLowestMidterm,other.dropLowestMidterm);
+           std::swap(landOwned,other.landOwned);
+       }
+
+    //assignment operator
+       player& operator=(player other)
+       {
+           swap(other);
+           return *this;
+       }
+
+       //move constructor
+//       player(player&& other)
+//           : player()
+//       {
+//           swap(other);
+//       }
+
+
 private:
 
 };
@@ -112,7 +144,7 @@ private:
 template <typename T>
 class RandomOrder{
 public:
-    bool operator()( const T& a, const T& b) const{
+    bool operator()( const T& , const T& ) const{
 
         return ( rand() % 2 ) == 0 ? true : false ;
     }
