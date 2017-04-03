@@ -218,7 +218,7 @@ That said, I used a wide variety of Qt classes, such as QLabels, QSliders, QGrid
 --------------------------------------------------------------------------------------------------------------
     Summary: 
 
-    • Used iterators for playerMap, to retreive player objects my reference
+    • Used iterators for playerMap, to retreive player objects by reference
 
     • Used iterators to pass in a range for std::sort generic algorithm for card decks
 
